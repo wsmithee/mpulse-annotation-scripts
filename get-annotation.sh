@@ -121,13 +121,13 @@ else
         DATE_END=$(date +%s)000
       fi
       if [ -n "$DOMAIN_ID" ]; then
-        URL="https://$HOST/concerto/mpulse/api/annotations/v1?date-start=$DATE_START&date-end=$DATE_END&domain=$DOMAIN_ID"
+        url="https://$HOST/concerto/mpulse/api/annotations/v1?date-start=$DATE_START&date-end=$DATE_END&domain=$DOMAIN_ID"
       else
-        URL="https://$HOST/concerto/mpulse/api/annotations/v1?date-start=$DATE_START&date-end=$DATE_END"
+        url="https://$HOST/concerto/mpulse/api/annotations/v1?date-start=$DATE_START&date-end=$DATE_END"
       fi
     fi
   else
-    URL="https://$HOST/concerto/mpulse/api/annotations/v1/$ANNOTATION_ID"
+    url="https://$HOST/concerto/mpulse/api/annotations/v1/$ANNOTATION_ID"
   fi
 fi
 
@@ -150,7 +150,7 @@ token_quoted=$(echo $token_json | jq .token)
 token_raw=$(echo $token_quoted | sed 's/\"//g')
 
 echo $URL
-curl --fail --silent --show-error -H "X-Auth-Token: $token_raw" -X GET $URL | jq
+curl --fail --silent --show-error -H "X-Auth-Token: $token_raw" -X GET $url | jq
 curl_result=$?
 
 if [ $curl_result -ne 0 ]; then
